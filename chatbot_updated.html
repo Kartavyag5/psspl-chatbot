@@ -1,53 +1,55 @@
 <!DOCTYPE html>
 <html lang="en-US">
 
-<head>
-    <link rel="stylesheet" href="chatbot.css" as="script">
-    <link rel="stylesheet"
-        href="https://mdbcdn.b-cdn.net/wp-content/themes/mdbootstrap4/docs-app/css/dist/mdb5/standard/core.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-</head>
+    <head>
+        <title>Psspl-Chatbot</title>
+        <link rel="icon" type="image/x-icon" href="./images/prakash_logo.png">
+        <link rel="stylesheet" href="chatbot.css" as="script">
+        <link rel="stylesheet"
+            href="https://mdbcdn.b-cdn.net/wp-content/themes/mdbootstrap4/docs-app/css/dist/mdb5/standard/core.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    </head>
 
-<body>
-    <section>
-        <div class="container-fluid p-md-4 px-4 py-3">
-            <div class="row">
-                <div id="chat-bot" class="p-lg-5 p-sm-4 p-3 mx-lg-3">
-                    <div class="chat-bot">
-                        <div class="mb-md-2 mb-0">
-                            <img class="logo" src="images/prakash_logo.png" class="mb-md-3 mb-2 cb-img img-fluid" alt="avatar">
-                            <h2 class="mb-md-4 mb-2"><b>Welcome to Prakash Software Solutions Pvt. Ltd.</b></h2>
-                            <h5 class="mb-2">Thanks for stopping by.</h5>
-                            <h5>I'm <b>Piri <img src="images/bot.png" class="bot-img img-fluid" alt="avatar">,</b> your
-                                virtual assistant for our website. Feel free to ask me anything - I'm here
-                                to help you!</h5>
-                        </div>
-                        <div class="row mt-xl-5 mb-lg-2 mt-1 mb-0 p-sm-0 p-2">
-                            <ul class="list-group cs-list mb-4">
-                                <li class="cs-btn" id="services-btn"><a href="#" >Tell me about your services.</a></li>
-                                <li class="cs-btn" id="projectHelp-btn"><a href="#">I need help with a specific project.</a></li>
-                                <li class="cs-btn" id="justBrowsing-btn"><a href="#" >I am just browsing.</a></li>
-                                <li class="cs-btn" id="otherInquires-btn"><a href="#">Other inquiries.</a></li>
-                            </ul>
-                        </div>
-                        <div id="chat-messages" class="row p-sm-0 p-2 pt-0"></div>
-                        <div class="row p-sm-0 p-2 pt-0" id="search-input-div">
-                            <div class="search-bar input-group">
-                                <input id='ask-input' type="text" class="sr-btn form-control" placeholder="Ask anything..."
-                                    aria-label="Search" aria-describedby="search-addon">
-                                <a class="send-btn" type="button" id="search-addon">
-                                    <i class="fas fa-paper-plane"></i>
-                                </a>
+    <body>
+        <section>
+            <div class="container-fluid p-md-4 px-4 py-3">
+                <div class="row">
+                    <div id="chat-bot" class="p-lg-5 p-sm-4 p-3 mx-lg-3">
+                        <div class="chat-bot">
+                            <div class="mb-md-2 mb-0">
+                                <img class="logo" src="images/prakash_logo.png" class="mb-md-3 mb-2 cb-img img-fluid" alt="avatar">
+                                <h2 class="mb-md-4 mb-2"><b>Welcome to Prakash Software Solutions Pvt. Ltd.</b></h2>
+                                <h5 class="mb-2">Thanks for stopping by.</h5>
+                                <h5>I'm <b>Piri <img src="images/bot.png" class="bot-img img-fluid" alt="avatar">,</b> your
+                                    virtual assistant for our website. Feel free to ask me anything - I'm here
+                                    to help you!</h5>
+                            </div>
+                            <div class="row mt-xl-5 mb-lg-2 mt-1 mb-0 p-sm-0 p-2">
+                                <ul class="list-group cs-list mb-4">
+                                    <li class="cs-btn" id="services-btn"><a href="#" >Tell me about your services.</a></li>
+                                    <li class="cs-btn" id="projectHelp-btn"><a href="#">I need help with a specific project.</a></li>
+                                    <li class="cs-btn" id="justBrowsing-btn"><a href="#" >I am just browsing.</a></li>
+                                    <li class="cs-btn" id="otherInquires-btn"><a href="#">Other inquiries.</a></li>
+                                </ul>
+                            </div>
+                            <div id="chat-messages" class="row p-sm-0 p-2 pt-0"></div>
+                            <div class="row p-sm-0 p-2 pt-0" id="search-input-div">
+                                <div class="search-bar input-group">
+                                    <input id='ask-input' type="text" class="sr-btn form-control" placeholder="Ask anything..."
+                                        aria-label="Search" aria-describedby="search-addon">
+                                    <a class="send-btn" type="button" id="search-addon">
+                                        <i class="fas fa-paper-plane"></i>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-<script type="text/javascript" src="./jquery_custom.js"></script>
-</body>
+    <script type="text/javascript" src="./jquery_custom.js"></script>
+    </body>
 
 </html>
