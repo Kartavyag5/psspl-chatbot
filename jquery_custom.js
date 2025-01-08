@@ -110,7 +110,8 @@ const addBotMessage = (msg) => {
     }
   };
 
-  typewriter(); // Start the typewriter effect
+  typewriter();
+  scrollToBottom(); // Start the typewriter effect
 };
 
 const addBotTextInput = () => {
@@ -155,8 +156,8 @@ const clickedOnJustBrowsingButton = () => {
     );
     radioButtonHTML = `<div class='radio-div'>
                 <div class="chat-options">
-                    <label><input type="radio" name="contact-option" value="Yes"> Yes</label>
-                    <label><input type="radio" name="contact-option" value="No"> No</label>
+                    <label><input type="radio" name="contact-option" value="Yes"><b> Yes</b></label>
+                    <label><input type="radio" name="contact-option" value="No"><b> No</b></label>
                 </div>
                 <div class="spacer" style="min-height: 10px;"></div>
             </div>
@@ -224,52 +225,33 @@ const clickedOnYourServicesButton = () => {
     }
 
     handleUserInput("dropdown");
-    // loading()
-    // Call the POST API with the selected service
-    // $.ajax({
-    //     // url: 'https://example.com/api/services', // Replace with actual API endpoint
-    //     // method: 'POST',
-    //     url: 'https://jsonplaceholder.typicode.com/posts', // Replace with actual API endpoint
-    //     method: 'GET',
-    //     contentType: 'application/json',
-    //     loading:loading(),
-    //     // data: JSON.stringify({ services: { name: selectedOption } }),
-    //     success: function (response) {
-    //         setTimeout(() => {
-    //             addBotMessage(response.message || 'Thank you! Here is the information you need.');
-    //             addBotTextInput()
-    //         }, 2000);
-    //     },
-    //     error: function () {
-    //         setTimeout(() => {
-    //             addBotMessage('Something went wrong, please try again later.');
-    //             addBotTextInput()
-    //         }, 2000);
-    //     }
-    // });
   });
 };
 
 // Handle user input and send message
-const handleUserInput = (type = "") => {
+const handleUserInput = (type = "", id = "") => {
   let userInput = "";
   if (type == "dropdown") {
     userInput = `service selected by you: <span class='bold'>${$(
       "#service-dropdown"
     ).val()}<span>`;
-    $(".dropdown-div").remove();
   } else if (type == "Yes" || type == "No") {
     userInput = type;
     $(".radio-div").remove();
+  } else if (type == "button") {
+    userInput = $(`#${id}`).text();
   } else {
     userInput = $(".sr-btn").val().trim();
-    $(".textarea-div").remove();
   }
 
   if (!userInput) {
     alert("Please type a message.");
     return;
   }
+
+  $(".textarea-div").remove();
+  $(".dropdown-div").remove();
+  $(".radio-div").remove();
 
   // Add user message (right-aligned)
   timeStamp("right");
@@ -283,7 +265,7 @@ const handleUserInput = (type = "") => {
   $(".sr-btn").val("");
 
   // Show loader while waiting for the API response
-  if (type == "Yes" || type == "No") return;
+  if (type == "Yes" || type == "No" || type == "button") return;
   loading();
 
   // Make the POST API call
@@ -322,12 +304,28 @@ const handleUserInput = (type = "") => {
   });
 };
 
+//this will disable button after clicked for prevent multiple clicked.
+const disableButton = () => {
+  $(".cs-btn")
+    .addClass("disabled")
+    .click((e) => e.preventDefault());
+  setTimeout(() => $(".cs-btn").removeClass("disabled"), 5000);
+};
+
 // Update button click handling to include the new button
 $(document).ready(function () {
   $(".cs-btn").on("click", function (e) {
     e.preventDefault();
 
+    if ($(".cs-btn").hasClass("disabled")) {
+      return;
+    }
+
+    disableButton();
+
     const clickedButtonId = $(this).attr("id");
+    handleUserInput("button", clickedButtonId);
+
     loading();
 
     setTimeout(() => {
