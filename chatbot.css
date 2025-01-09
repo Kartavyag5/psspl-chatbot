@@ -131,6 +131,16 @@ input.sr-btn {
 }
 
 @media (max-width: 575px) {
+    .logo {
+        width:175px;
+    }
+    .chat-bot{
+        font-size: 13px;
+    }
+    .textarea-container textarea{
+        font-size: 13px;
+    }
+    
     .cb-img {
         width: 30px;
         height: 30px;
