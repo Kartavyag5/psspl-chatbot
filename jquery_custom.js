@@ -220,7 +220,8 @@ const clickedOnYourServicesButton = () => {
     const selectedOption = $("#service-dropdown").val();
 
     if (!selectedOption) {
-      alert("Please select a service.");
+      showToast("Please select a service.");
+
       return;
     }
 
@@ -245,7 +246,7 @@ const handleUserInput = (type = "", id = "") => {
   }
 
   if (!userInput) {
-    alert("Please type a message.");
+    showToast("Please type a message.");
     return;
   }
 
@@ -304,7 +305,7 @@ const handleUserInput = (type = "", id = "") => {
   });
 };
 
-//this will disable button after clicked for prevent multiple clicked.
+//this will disable button after clicked for prevent multiple clicking.
 const disableButton = () => {
   $(".cs-btn")
     .addClass("disabled")
@@ -312,15 +313,38 @@ const disableButton = () => {
   setTimeout(() => $(".cs-btn").removeClass("disabled"), 5000);
 };
 
+// Function to show toast messages
+function showToast(message) {
+  const $toastContainer = $("#toast-container");
+
+  // Create toast element
+  const toastHTML = `<div class="toast-message">${message}</div>`;
+  const $toast = $(toastHTML);
+
+  // Append to container
+  $toastContainer.append($toast);
+
+  // Show toast
+  setTimeout(() => $toast.addClass("show"), 100);
+
+  // Remove toast after 2 seconds
+  setTimeout(() => {
+    $toast.removeClass("show");
+    setTimeout(() => $toast.remove(), 300); // Allow time for animation
+  }, 2000);
+}
+
 // Update button click handling to include the new button
 $(document).ready(function () {
   $(".cs-btn").on("click", function (e) {
     e.preventDefault();
 
+    // if disable class added so return function without
     if ($(".cs-btn").hasClass("disabled")) {
       return;
     }
 
+    //for preventing multiple api calling.
     disableButton();
 
     const clickedButtonId = $(this).attr("id");
@@ -361,4 +385,33 @@ $(document).ready(function () {
       handleUserInput();
     }
   });
+});
+
+//adding scroll to bottom functionality
+$(document).ready(function () {
+  const $scrollToBottomBtn = $("#scroll-to-bottom");
+  const $chatBotContainer = $("#chat-bot");
+
+  // Show/hide button based on scroll position
+  $chatBotContainer.on("scroll", function () {
+    if (
+      $chatBotContainer[0].scrollHeight - $chatBotContainer.scrollTop() >
+      $chatBotContainer.outerHeight() + 100
+    ) {
+      $scrollToBottomBtn.addClass("active");
+    } else {
+      $scrollToBottomBtn.removeClass("active");
+    }
+  });
+
+  // Scroll to bottom when button is clicked
+  $scrollToBottomBtn.on("click", function () {
+    $chatBotContainer.animate(
+      { scrollTop: $chatBotContainer[0].scrollHeight },
+      500
+    );
+  });
+
+  // Ensure scroll button is hidden initially
+  $scrollToBottomBtn.removeClass("active");
 });
