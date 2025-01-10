@@ -303,10 +303,12 @@ const handleUserInput = (type = "", id = "") => {
       }, 1300); // Show the initial buttons again after the response
     })
     .fail(function () {
-      showToast("Error processing your request. please try again later.");
       setTimeout(() => {
-        addBotTextInput();
-      }, 500);
+        showToast("Error processing your request. please try again later.");
+        setTimeout(() => {
+          addBotTextInput();
+        }, 500);
+      }, 1300);
     });
 };
 
