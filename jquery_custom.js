@@ -114,10 +114,10 @@ const addBotMessage = (msg) => {
   scrollToBottom(); // Start the typewriter effect
 };
 
-const addBotTextInput = () => {
+const addBotTextInput = (id = "normal") => {
   $(".textarea-div").remove();
   const textareaHTML = `
-    <div class='textarea-div'>
+    <div id=${id} class='textarea-div'>
         <div class="textarea-container">
             <textarea class="sr-btn form-control" rows="2" placeholder="Type your message here..."></textarea>
             <button class="send-btn" id="search-addon" onclick="handleUserInput()"> 
@@ -135,7 +135,7 @@ const addBotTextInput = () => {
 const clickedOnProjectHelpButton = () => {
   addBotMessage("That's great! Could you tell me more about your project?");
   // Add textarea with a send button
-  addBotTextInput();
+  addBotTextInput("projectHelp");
 };
 const clickedOnOtherQueriesButton = () => {
   addBotMessage(
@@ -174,7 +174,7 @@ const clickedOnJustBrowsingButton = () => {
           addBotMessage(
             "Please provide your Email-Id or Contact Number so that we can reach out."
           );
-          addBotTextInput();
+          addBotTextInput("shareContact");
         }, 1300);
       } else if (selectedOption === "No") {
         loading();
@@ -221,7 +221,6 @@ const clickedOnYourServicesButton = () => {
 
     if (!selectedOption) {
       showToast("Please select a service.");
-
       return;
     }
 
@@ -232,10 +231,11 @@ const clickedOnYourServicesButton = () => {
 // Handle user input and send message
 const handleUserInput = (type = "", id = "") => {
   let userInput = "";
+  let userValue = "";
+  let textAreaId = "";
   if (type == "dropdown") {
-    userInput = `service selected by you: <span class='bold'>${$(
-      "#service-dropdown"
-    ).val()}<span>`;
+    userValue = $("#service-dropdown").val();
+    userInput = `service selected by you: <span class='bold'>${userValue}<span>`;
   } else if (type == "Yes" || type == "No") {
     userInput = type;
     $(".radio-div").remove();
@@ -243,6 +243,7 @@ const handleUserInput = (type = "", id = "") => {
     userInput = $(`#${id}`).text();
   } else {
     userInput = $(".sr-btn").val().trim();
+    textAreaId = $(".textarea-div").attr("id");
   }
 
   if (!userInput) {
@@ -269,40 +270,44 @@ const handleUserInput = (type = "", id = "") => {
   if (type == "Yes" || type == "No" || type == "button") return;
   loading();
 
+  //api url select based on id
+  let URL = "/submit_inquiry";
+  let payload = { query: userInput };
+  if (textAreaId == "shareContact") {
+    URL = "/contact_form";
+    payload = userInput.includes("@")
+      ? { email: userInput }
+      : { phone: userInput };
+  } else if (textAreaId == "projectHelp") {
+    URL = "/submit_project";
+    payload = { project_details: userInput };
+  } else if (type == "dropdown") {
+    URL = "/submit_service";
+    payload = { service: userValue };
+  }
   // Make the POST API call
-  $.ajax({
-    // url: 'https://example.com/api/messages', // Replace with actual API endpoint
-    // method: 'POST',
-    url: "https://jsonplaceholder.typicode.com/posts", // Replace with actual API endpoint
-    method: "GET",
-    contentType: "application/json",
-    // data: JSON.stringify({ message: userInput }),
-    success: function (response) {
+
+  // $.post("/submit_inquiry", { inquiry: inquiryDetails })
+  // $.post("https://jsonplaceholder.typicode.com/posts", payload)
+  $.post(URL, payload)
+    .done(function (data) {
       setTimeout(() => {
-        // Add bot response (left-aligned)
         addBotMessage(
-          response.message ||
-            "I received your Response! please allow me sometime.."
+          data.message || "I received your Response! please allow me sometime.."
         );
 
         // Show input again for the next message
         setTimeout(() => {
           addBotTextInput();
         }, 500);
-      }, 1300);
-    },
-    error: function () {
+      }, 1300); // Show the initial buttons again after the response
+    })
+    .fail(function () {
+      showToast("Error processing your request. please try again later.");
       setTimeout(() => {
-        // Show error message
-        addBotMessage("Something went wrong, please try again later.");
-
-        // Show input again for the next message
-        setTimeout(() => {
-          addBotTextInput();
-        }, 500);
-      }, 1300);
-    },
-  });
+        addBotTextInput();
+      }, 500);
+    });
 };
 
 //this will disable button after clicked for prevent multiple clicking.
