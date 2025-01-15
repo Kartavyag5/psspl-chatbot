@@ -156,8 +156,8 @@ const clickedOnJustBrowsingButton = () => {
     );
     radioButtonHTML = `<div class='radio-div'>
                 <div class="chat-options">
-                    <label><input type="radio" name="contact-option" value="Yes"><b> Yes</b></label>
-                    <label><input type="radio" name="contact-option" value="No"><b> No</b></label>
+                    <label><input type="radio" name="contact-option" value="Yes"><b> Yes, share my contact</b></label>
+                    <label><input type="radio" name="contact-option" value="No"><b> No, thank you</b></label>
                 </div>
                 <div class="spacer" style="min-height: 10px;"></div>
             </div>
@@ -228,6 +228,15 @@ const clickedOnYourServicesButton = () => {
   });
 };
 
+const afterSubmitProjectDetails = () => {
+  setTimeout(() => {
+    addBotMessage(
+      "Thank you for sharing! Please provide your Email-Id or Contact Number so that we can assist you further."
+    );
+    addBotTextInput("shareContact");
+  }, 1300);
+};
+
 // Handle user input and send message
 const handleUserInput = (type = "", id = "") => {
   let userInput = "";
@@ -292,6 +301,10 @@ const handleUserInput = (type = "", id = "") => {
   $.post(URL, payload)
     .done(function (data) {
       setTimeout(() => {
+        if (URL == "/submit_project") {
+          afterSubmitProjectDetails();
+          return;
+        }
         addBotMessage(
           data.message || "I received your Response! please allow me sometime.."
         );

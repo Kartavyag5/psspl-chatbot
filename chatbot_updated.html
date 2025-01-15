@@ -13,19 +13,19 @@
 
     <body>
         <section>
-            <div class="container-fluid p-md-4 px-4 py-3">
+            <div class="container-fluid px-4 py-3">
                 <div class="row">
                     <div id="chat-bot" class="p-lg-5 p-sm-4 p-3 mx-lg-1">
-                        <div class="chat-bot">
-                            <div class="mb-md-2 mb-0">
-                                <img class="logo" src="images/prakash_logo.png" class="mb-md-3 mb-2 cb-img img-fluid" alt="avatar">
-                                <h2 class="mb-2"><b>Welcome to Prakash Software Solutions Pvt. Ltd.</b></h2>
-                                <h5 class="mb-2">Thanks for stopping by.</h5>
-                                <h5>I'm <b>Piri <img src="images/bot.png" class="bot-img img-fluid" alt="avatar">,</b> your
-                                    virtual assistant for our website. Feel free to ask me anything - I'm here
-                                    to help you!</h5>
-                            </div>
-                            <div class="row mt-xl-5 mb-lg-2 mt-1 mb-0 p-sm-0 p-2">
+                        <div class="mb-md-2 mb-0">
+                            <img class="logo" src="images/prakash_logo.png" class="mb-md-3 mb-2 cb-img img-fluid" alt="avatar">
+                            <h2 class="mb-2"><b>Welcome to Prakash Software Solutions Pvt. Ltd.</b></h2>
+                            <h5 class="mb-2">Thanks for stopping by.</h5>
+                            <h5>I'm <b>Piri <img src="images/bot.png" class="bot-img img-fluid" alt="avatar">,</b> your
+                                virtual assistant for our website. Feel free to ask me anything - I'm here
+                                to help you!</h5>
+                        </div>
+                        <!-- <div class="sticky-container"> -->
+                            <div class="row mt-xl-4 mb-lg-2 mt-1 mb-0 p-sm-0 p-2">
                                 <ul class="list-group cs-list mb-4">
                                     <li class="cs-btn" id="services-btn">Tell me about your services.</li>
                                     <li class="cs-btn" id="projectHelp-btn">I need help with a specific project.</li>
@@ -33,14 +33,16 @@
                                     <li class="cs-btn" id="otherInquires-btn">Other inquiries.</li>
                                 </ul>
                             </div>
+                        <!-- </div> -->
+                        <div class="chat-bot">
                             <div id="chat-messages" class="row p-sm-0 p-2 pt-0"></div>
                             <div class="row p-sm-0 p-2 pt-0" id="search-input-div">
                                 <div class="search-bar input-group">
                                     <input id='ask-input' type="text" class="sr-btn form-control" placeholder="Ask anything..."
                                         aria-label="Search" aria-describedby="search-addon">
-                                    <a class="send-btn" type="button" id="search-addon">
+                                    <button class="send-btn" type="button" id="search-addon">
                                         <i class="fas fa-paper-plane"></i>
-                                    </a>
+                                    </button>
                                 </div>
                             </div>
                         </div>
