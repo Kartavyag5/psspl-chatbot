@@ -107,6 +107,8 @@ input.sr-btn {
     background: none;
 }
 
+
+
 .send-btn i {
     color: #ccc;
     font-size: 20px;
@@ -162,30 +164,45 @@ input.sr-btn {
     align-self: flex-start;
 }
 
+.textarea-div{
+    position: sticky;
+    bottom: -48px;
+    background: #EBF9FF;
+} 
+
 /* Styling for textarea container */
 .textarea-container {
     display: flex;
     align-items: center;
     position: relative;
     margin: 5px 0;
+    border: 8px solid #a5d2e9;
+    border-radius: 30px;
 }
 
 .textarea-container textarea {
     flex-grow: 1;
     border-radius: 20px;
     padding-right: 50px;
+    /* border: 8px solid #a5d2e9; */
 }
 
 .textarea-container .send-btn {
     position: absolute;
-    right: 10px;
-    top: 80%;
+    right: 6px;
+    /* top: 80%; */
+    margin:31px 0px;
     transform: translateY(-50%);
     background: none;
     border: none;
     color: #2B90C2;
     font-size: 20px;
     cursor: pointer;
+}
+
+.textarea-container .send-btn:hover {
+    background-color: #12609F;
+    color: #fff;
 }
 
 .timestamp {
@@ -229,6 +246,7 @@ input.sr-btn {
     border-radius: 20px;
     padding: 10px;
     font-size: 14px;
+    border: 8px solid #a5d2e9;
 }
 
 #service-submit-btn {
@@ -237,7 +255,6 @@ input.sr-btn {
     border-radius: 20px;
 }
 
-/* User message (right-aligned) */
 .user-message {
     background-color: #dee04e; /* Light green background */
     padding: 10px 15px;
@@ -269,7 +286,10 @@ input.sr-btn {
 
 #chat-bot::-webkit-scrollbar-thumb {
     background: #71b8db; /* Thumb color */
-    border-radius: 50px; /* Make the thumb rounded */
+    border-radius: 50px;
+    border: 1px solid black;
+    cursor:pointer;
+     /* Make the thumb rounded */
     /* border: 2px solid #EBF9FF; */
 }
 
@@ -290,12 +310,14 @@ input.sr-btn {
 
 .textarea-container textarea::-webkit-scrollbar-track {
     /* background: #FFFFFF;  */
-    margin: 10px 0;
+    margin: 15px 0;
 }
 
 .textarea-container textarea::-webkit-scrollbar-thumb {
     background: #71b8db; /* Thumb color */
     border-radius: 50px;
+    border: 1px solid black;
+    cursor: pointer;
 }
 
 .textarea-container textarea::-webkit-scrollbar-thumb:hover {
@@ -319,7 +341,7 @@ input.sr-btn {
 /* Scroll-to-Bottom Button */
 .scroll-to-bottom-btn {
     position: fixed;
-    bottom: 20px;
+    bottom: 80px;
     right: 20px;
     background-color: #12609F; /* Same as hover color */
     color: #fff;
@@ -405,6 +427,10 @@ input.sr-btn {
         width: 60px;
         height: 60px;
     }
+
+    .textarea-div{
+        bottom: -24px;
+    }
 }
 
 @media (max-width: 767px) {
@@ -424,6 +450,20 @@ input.sr-btn {
     
     .textarea-container textarea{
         font-size: 13px;
+    }
+    .textarea-container .send-btn{
+        right: 0px;
+        margin: 27px 0px;
+        width: 36px;
+        height: 36px;
+    }
+
+    .scroll-to-bottom-btn{
+        width: 30px;
+        height: 30px;
+    }
+    .scroll-to-bottom-btn i{
+        font-size: 14px;
     }
     
     .cb-img {

@@ -114,6 +114,11 @@ const addBotMessage = (msg) => {
   scrollToBottom(); // Start the typewriter effect
 };
 
+const ensureTextareaVisible = () => {
+  const chatBot = $("#chat-bot");
+  chatBot.animate({ scrollTop: chatBot[0].scrollHeight }, 500);
+};
+
 const addBotTextInput = (id = "normal") => {
   $(".textarea-div").remove();
   const textareaHTML = `
@@ -124,11 +129,11 @@ const addBotTextInput = (id = "normal") => {
                 <i class="fas fa-paper-plane"></i>
             </button>
             </div>
-        <div class="spacer" style="min-height: 10px;"></div>
     </div>
     `;
 
   $(".chat-bot").append(textareaHTML);
+  // ensureTextareaVisible();
   scrollToBottom();
 };
 
@@ -247,7 +252,6 @@ const handleUserInput = (type = "", id = "") => {
     userInput = `service selected by you: <span class='bold'>${userValue}<span>`;
   } else if (type == "Yes" || type == "No") {
     userInput = type;
-    $(".radio-div").remove();
   } else if (type == "button") {
     userInput = $(`#${id}`).text();
   } else {
@@ -335,6 +339,7 @@ const disableButton = () => {
 
 // Function to show toast messages
 function showToast(message) {
+  $(".toast-message").remove();
   const $toastContainer = $("#toast-container");
 
   // Create toast element

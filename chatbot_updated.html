@@ -37,12 +37,21 @@
                         <div class="chat-bot">
                             <div id="chat-messages" class="row p-sm-0 p-2 pt-0"></div>
                             <div class="row p-sm-0 p-2 pt-0" id="search-input-div">
-                                <div class="search-bar input-group">
+                                <!-- <div class="search-bar input-group">
                                     <input id='ask-input' type="text" class="sr-btn form-control" placeholder="Ask anything..."
                                         aria-label="Search" aria-describedby="search-addon">
                                     <button class="send-btn" type="button" id="search-addon">
                                         <i class="fas fa-paper-plane"></i>
                                     </button>
+                                </div> -->
+                                <div class='textarea-div'>
+                                    <div class="textarea-container">
+                                        <textarea class="sr-btn form-control" rows="2" placeholder="Ask anything here..."></textarea>
+                                        <button class="send-btn" id="search-addon" onclick="handleUserInput()"> 
+                                            <i class="fas fa-paper-plane"></i>
+                                        </button>
+                                        </div>
+                                    <!-- <div class="spacer" style="min-height: 10px;"></div> -->
                                 </div>
                             </div>
                         </div>
